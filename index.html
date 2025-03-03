@@ -1,0 +1,174 @@
+<html lang="en">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>
+   NGO &amp; User Page
+  </title>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;display=swap" rel="stylesheet"/>
+  <style>
+   body {
+     background: linear-gradient(to bottom, #ffffff, #a7f3d0);
+   }
+   .fade-in {
+     opacity: 0;
+     transform: translateY(20px);
+     transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+   }
+   .fade-in.visible {
+     opacity: 1;
+     transform: translateY(0);
+   }
+  </style>
+ </head>
+ <body class="text-green-900 font-roboto">
+  <nav class="bg-green-700 text-white p-4 fixed w-full top-0 z-50">
+   <div class="container mx-auto flex justify-between items-center">
+    <div class="text-2xl font-bold">
+     NGO Platform
+    </div>
+   </div>
+  </nav>
+  <div class="fixed top-5 left-5 cursor-pointer text-2xl z-50" onclick="toggleMenu()">
+   <i class="fas fa-bars">
+   </i>
+  </div>
+  <div class="fixed top-16 left-5 bg-white p-4 rounded-lg shadow-lg w-48 hidden" id="menuItems">
+   <p class="py-2 px-4 cursor-pointer hover:bg-green-700 hover:text-white rounded" onclick="navigateTo('home')">
+    Home
+   </p>
+   <p class="py-2 px-4 cursor-pointer hover:bg-green-700 hover:text-white rounded" onclick="navigateTo('about')">
+    About
+   </p>
+   <p class="py-2 px-4 cursor-pointer hover:bg-green-700 hover:text-white rounded" onclick="navigateTo('contact')">
+    Contact
+   </p>
+   <p class="py-2 px-4 cursor-pointer hover:bg-green-700 hover:text-white rounded" onclick="navigateTo('services')">
+    Services
+   </p>
+   <p class="py-2 px-4 cursor-pointer hover:bg-green-700 hover:text-white rounded" onclick="navigateTo('help')">
+    Help
+   </p>
+  </div>
+  <div class="flex flex-col items-center justify-center min-h-screen p-4 pt-20" onclick="closeMenu(event)">
+   <h1 class="text-4xl font-bold mb-6">
+    Welcome to Our Platform
+   </h1>
+   <h2 class="text-2xl font-semibold mb-6">
+    Are you an NGO looking for promotions or a citizen looking to volunteer?
+   </h2>
+   <div class="flex flex-col items-center space-y-4">
+    <a class="flex items-center justify-center gap-2 w-64 p-4 text-lg border-2 border-green-700 rounded-lg bg-transparent hover:bg-green-700 hover:text-white transition" href="ngologin.html">
+     <i class="fas fa-hand-holding-heart">
+     </i>
+     NGO
+    </a>
+    <div class="flex items-center justify-center gap-2 w-64 p-4 text-lg border-2 border-green-700 rounded-lg bg-transparent hover:bg-green-700 hover:text-white transition" onmouseout="hideText()" onmouseover="showText('I want to be a volunteer')"><a href=""C:\xampp\htdocs\s.php"">
+     <i class="fas fa-users">
+     </i>
+     User
+   </a> </div>
+    <div class="text-lg mt-2 min-h-6" id="hoverText">
+    </div>
+   </div>
+   <div class="mt-8 w-full max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div class="bg-white border-2 border-green-700 rounded-lg p-6 text-center cursor-pointer hover:bg-green-700 hover:text-white transition fade-in" onclick="navigateTo('customize-products')">
+   <a href="ecommerce.html">   <img alt="Icon representing product customization" class="mx-auto mb-4" height="80" src="https://storage.googleapis.com/a1aa/image/lvBUbpijyxN4paiJV1bd47quzGUj46fGG3sIvPg5wSU.jpg" width="80"/>
+     <h3 class="text-xl font-bold">
+      Customize Your Own Products or Ours and Sell
+    </a> </h3>
+    </div>
+    <div class="bg-white border-2 border-green-700 rounded-lg p-6 text-center cursor-pointer hover:bg-green-700 hover:text-white transition fade-in" onclick="navigateTo('earn-while-learning')">
+    <img alt="Icon representing earning while learning" class="mx-auto mb-4" height="80" src="https://storage.googleapis.com/a1aa/image/A7cKCqTePo0NCpssNW36EfOJH16aY7pnieW42P5rb3s.jpg" width="80"/>
+     <h3 class="text-xl font-bold">
+      Earn While Learning
+     </h3>
+    </div>
+    <div class="bg-white border-2 border-green-700 rounded-lg p-6 text-center cursor-pointer hover:bg-green-700 hover:text-white transition fade-in" onclick="navigateTo('awareness-programs')">
+     <img alt="Icon representing awareness programs" class="mx-auto mb-4" height="80" src="https://storage.googleapis.com/a1aa/image/b_BN84QG5IjGQ6_nFs-kEYNjAg1zdnOqy14OiUWpqjo.jpg" width="80"/>
+     <h3 class="text-xl font-bold">
+      Join Our Awareness Programs
+     </h3>
+    </div>
+   </div>
+   <div class="mt-8 w-full max-w-4xl">
+    <h2 class="text-2xl font-semibold mb-4">
+     Are you aware how NGOs work?
+    </h2>
+    <div class="bg-green-100 p-6 rounded-lg shadow-lg">
+     <div class="flex flex-col md:flex-row items-center">
+      <img alt="Image representing NGO work" class="w-32 h-32 md:w-48 md:h-48 rounded-full mb-4 md:mb-0 md:mr-6" src="https://storage.googleapis.com/a1aa/image/1bi7bcXONUhTHqBvicQXFz7SVvDruiH2OdF7rv8ygpQ.jpg"/>
+      <p class="text-lg">
+       NGOs, or Non-Governmental Organizations, are independent groups that work towards social, environmental, cultural, or humanitarian goals. They operate independently from the government and are usually non-profit. NGOs can work on a wide range of issues including human rights, environmental protection, health, education, and more. They rely on donations, grants, and volunteers to carry out their missions.
+      </p>
+     </div>
+    </div>
+   </div>
+   <div class="mt-8 w-full max-w-4xl">
+    <h2 class="text-2xl font-semibold mb-4">
+     Have Doubts? Send a Request
+    </h2>
+    <form class="bg-white p-6 rounded-lg shadow-lg">
+     <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="name">
+       Name
+      </label>
+      <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="name" placeholder="Your Name" type="text"/>
+     </div>
+     <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="email">
+       Email
+      </label>
+      <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" placeholder="Your Email" type="email"/>
+     </div>
+     <div class="mb-4">
+      <label class="block text-gray-700 text-sm font-bold mb-2" for="message">
+       Message
+      </label>
+      <textarea class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="message" placeholder="Your Message">
+      </textarea>
+     </div>
+     <div class="flex items-center justify-between">
+      <button class="bg-green-700 hover:bg-green-800 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+       Send Request
+      </button>
+     </div>
+    </form>
+   </div>
+  </div>
+  <script>
+   function toggleMenu() {
+            document.getElementById("menuItems").classList.toggle("hidden");
+        }
+        function closeMenu(event) {
+            if (!event.target.closest(".fixed") && !event.target.closest("#menuItems")) {
+                document.getElementById("menuItems").classList.add("hidden");
+            }
+        }
+        document.addEventListener("click", closeMenu);
+        function showText(text) {
+            document.getElementById("hoverText").innerText = text;
+        }
+        function hideText() {
+            document.getElementById("hoverText").innerText = "";
+        }
+        function navigateTo(page) {
+            alert("Navigating to " + page);
+        }
+        function handleScroll() {
+            const elements = document.querySelectorAll('.fade-in');
+            elements.forEach(element => {
+                const rect = element.getBoundingClientRect();
+                if (rect.top < window.innerHeight) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+        window.addEventListener('scroll', handleScroll);
+        document.addEventListener('DOMContentLoaded', handleScroll);
+  </script>
+ </body>
+</html>

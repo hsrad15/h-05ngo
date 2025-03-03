@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register NGO</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: white;
+            color: green;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        .menu {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            cursor: pointer;
+            font-size: 24px;
+            z-index: 1000;
+        }
+        .menu-items {
+            display: none;
+            position: fixed;
+            top: 60px;
+            left: 20px;
+            background: white;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 200px;
+        }
+        .menu-items.show {
+            display: block;
+        }
+        .menu-items p {
+            margin: 10px 0;
+            cursor: pointer;
+            padding: 5px;
+            transition: 0.3s;
+        }
+        .menu-items p:hover {
+            background: green;
+            color: white;
+            border-radius: 5px;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            padding: 20px;
+        }
+        .typing-effect {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            height: 30px;
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: 2px solid green;
+            width: fit-content;
+        }
+        .form-container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .input-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border: 2px solid green;
+            border-radius: 5px;
+            padding: 10px;
+        }
+        .input-group input {
+            border: none;
+            outline: none;
+            flex: 1;
+        }
+        .submit-btn {
+            background: green;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+        .submit-btn:hover {
+            background: darkgreen;
+        }
+        .eye-icon {
+            cursor: pointer;
+        }
+        @media (max-width: 600px) {
+            .menu {
+                font-size: 20px;
+            }
+            .form-container {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="menu" onclick="toggleMenu()">
+        <i class="fas fa-bars"></i>
+    </div>
+    <div class="menu-items" id="menuItems">
+        <p onclick="navigateTo('home')">Home</p>
+        <p onclick="navigateTo('about')">About</p>
+        <p onclick="navigateTo('contact')">Contact</p>
+        <p onclick="navigateTo('services')">Services</p>
+        <p onclick="navigateTo('help')">Help</p>
+    </div>
+    
+    <div class="container" onclick="closeMenu(event)">
+        <div class="typing-effect" id="typing-text"></div>
+        <div class="form-container">
+            <div class="input-group">
+                <i class="fas fa-building"></i>
+                <input type="text" id="ngo-name" placeholder="NGO Name" required>
+            </div>
+            <div class="input-group">
+                <i class="fas fa-phone"></i>
+                <input type="text" id="ngo-number" placeholder="NGO Number" required>
+            </div>
+            <div class="input-group">
+                <i class="fas fa-envelope"></i>
+                <input type="email" id="email" placeholder="Email ID" required>
+            </div>
+            <div class="input-group">
+                <i class="fas fa-lock"></i>
+                <input type="password" id="password" placeholder="Password" required>
+                <i class="fas fa-eye eye-icon" onclick="togglePassword()"></i>
+            </div>
+            <button class="submit-btn" onclick="submitForm()"><a href="template.html">Submit</a></button>
+            <p>Already registered? <a href="ngo_login.html">Login</a></p>
+        </div>
+    </div>
+
+</body>
+</html>
+
+    <script>
+        function toggleMenu() {
+            document.getElementById("menuItems").classList.toggle("show");
+        }
+        function closeMenu(event) {
+            if (!event.target.closest(".menu") && !event.target.closest(".menu-items")) {
+                document.getElementById("menuItems").classList.remove("show");
+            }
+        }
+        function navigateTo(page) {
+            alert("Navigating to " + page);
+        }
+        
+        function submitForm() {
+            const ngoName = document.getElementById("ngo-name").value;
+            const ngoNumber = document.getElementById("ngo-number").value;
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+            
+            if (!ngoName || !ngoNumber || !email || !password) {
+                alert("All fields are required!");
+                return;
+            }
+            window.location.href = "thankyou.html";
+        }
+        
+        function togglePassword() {
+            const passwordField = document.getElementById("password");
+            const eyeIcon = document.querySelector(".eye-icon");
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+                eyeIcon.classList.remove("fa-eye");
+                eyeIcon.classList.add("fa-eye-slash");
+            } else {
+                passwordField.type = "password";
+                eyeIcon.classList.remove("fa-eye-slash");
+                eyeIcon.classList.add("fa-eye");
+            }
+        }
+        
+        const text = "Register Yourself as NGO";
+        let i = 0;
+        function typeEffect() {
+            if (i < text.length) {
+                document.getElementById("typing-text").textContent += text.charAt(i);
+                i++;
+                setTimeout(typeEffect, 100);
+            }
+        }
+        window.onload = typeEffect;
+    </script>
+</body>
+</html>

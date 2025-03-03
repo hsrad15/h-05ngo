@@ -1,0 +1,197 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NGO - E-commerce</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            color: #333;
+        }
+        header {
+            background-color: #ff6f61;
+            padding: 15px;
+            text-align: center;
+            color: white;
+            font-size: 1.8em;
+            font-weight: bold;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            background-color: #ff8566;
+        }
+        nav ul li {
+            margin: 10px;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 10px 15px;
+            transition: 0.3s;
+            border-radius: 5px;
+        }
+        nav ul li a:hover {
+            background-color: white;
+            color: #ff6f61;
+        }
+        main {
+            width: 80%;
+            margin: 20px auto;
+            text-align: center;
+        }
+        section {
+            margin: 30px 0;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        .products-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+        .product {
+            width: 250px;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s;
+            background-color: #fff;
+        }
+        .product:hover {
+            transform: scale(1.05);
+        }
+        .product img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+        .product h3 {
+            margin: 10px 0;
+            color: #ff6f61;
+        }
+        button {
+            background-color: #ff6f61;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        button:hover {
+            background-color: #ff8566;
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <header>Handmade Treasures</header>
+    <nav>
+        <ul>
+            <li><a href="#contact">Contact Us</a></li>
+            <li><a href="#cart" id="cart-link">Cart (<span id="cart-count">0</span>)</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section id="diaries">
+            <h2>Handmade Diaries</h2>
+            <div class="products-container">
+                <div class="product">
+                    <img src="https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcQNEjWG4kYvTDT5se6lhRwHAig7uI6BNYRpIj_3dqb7Qtt35gxThd_gBBykHS4OX0Eb9c5nM2uE-3o0uX28-EicbkGZXbTJ_Ki4S2Eq2hi29P4YDuUVF5tT" alt="Leather Bound Diary">
+                    <h3>Leather Bound Diary</h3>
+                    <p>₹500.00</p>
+                    <button onclick="addToCart('Leather Bound Diary', 500)">Add to Cart</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="greeting-cards">
+            <h2>Greeting Cards</h2>
+            <div class="products-container">
+                <div class="product">
+                    <img src="https://i.etsystatic.com/34706303/r/il/8d8dcb/4879209379/il_570xN.4879209379_gxs1.jpg" alt="Handmade Greeting Card">
+                    <h3>Floral Greeting Card</h3>
+                    <p>₹200.00</p>
+                    <button onclick="addToCart('Floral Greeting Card', 200)">Add to Cart</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="keychains">
+            <h2>Handmade Keychains</h2>
+            <div class="products-container">
+                <div class="product">
+                    <img src="https://www.chumbak.com/cdn/shop/files/8907605093159_1_dc2b1e7b-a2a9-49d1-a079-a705fe8ea68b.jpg?v=1735649211" alt="Wooden Keychain">
+                    <h3>Wooden Keychain</h3>
+                    <p>₹100.00</p>
+                    <button onclick="addToCart('Wooden Keychain', 100)">Add to Cart</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2>Contact Us</h2>
+            <p>Email: contact@handmadetreasures.com</p>
+            <p>Phone: +91 9876543210</p>
+        </section>
+
+        <section id="cart">
+            <h2>Your Cart</h2>
+            <div id="cart-items">
+                <p>Your cart is empty.</p>
+            </div>
+            <button onclick="processPayment()">Proceed to Payment</button>
+        </section>
+    </main>
+    
+    <footer>
+        <p>&copy; 2025 Handmade Treasures. All rights reserved.</p>
+    </footer>
+
+    <script>
+        let cart = [];
+        function addToCart(product, price) {
+            cart.push({ product, price });
+            document.getElementById('cart-count').innerText = cart.length;
+        }
+        function processPayment() {
+            let total = cart.reduce((sum, item) => sum + item.price, 0);
+            var options = {
+                "key": "your_razorpay_key",
+                "amount": total * 100,
+                "currency": "INR",
+                "name": "Handmade Treasures",
+                "description": "Purchase Items",
+                "handler": function (response) {
+                    alert('Payment successful! Transaction ID: ' + response.razorpay_payment_id);
+                },
+                "theme": {
+                    "color": "#ff6f61"
+                }
+            };
+            var rzp = new Razorpay(options);
+            rzp.open();
+        }
+    </script>
+</body>
+</html
